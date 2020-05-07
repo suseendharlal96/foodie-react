@@ -4,9 +4,7 @@ import classes from "./Backdrop.module.css";
 
 const backdrop = (props) =>
   props.show ? (
-    <div className={classes.Backdrop} onClick={props.click}>
-      {props}
-    </div>
+    <div className={classes.Backdrop} onClick={props.click}></div>
   ) : null;
 
 export default backdrop;

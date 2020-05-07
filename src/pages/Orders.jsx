@@ -128,7 +128,7 @@ class Orders extends React.Component {
     console.log(obj);
 
     this.props.initOrder(obj);
-    if (this.props.email) {
+    if (this.props.email || localStorage.getItem("token") !== null) {
       this.props.history.replace("/checkout");
     } else {
       this.props.history.replace("/auth");
@@ -144,42 +144,16 @@ class Orders extends React.Component {
     });
     console.log("cart", cartArr);
     return (
-      <div>
-        <div className="nav">
-          <div id="logo">
-            <h2>FOODIE</h2>
-          </div>
-
-          {this.props.email ? (
-            <div id="user">
-              <div style={{ color: "yellow" }} className="name">
-                {"Hello " + this.props.email}
-              </div>
+      <div id="content">
+        <div className="row">
+          <div className="col-md-8">
+            <div style={{ backgroundColor: "black" }}>
+              <h1 className="hname">{this.state.newList.map((x) => x.name)}</h1>
+              <h5 className="aname">
+                <i className="fa fa-map-marker" style={{ fontSize: 18 }}></i>{" "}
+                {this.state.newList.map((x) => x.address)}
+              </h5>
             </div>
-          ) : (
-            <div style={{ margin: "15px" }}>
-              <button
-                style={{
-                  outline: "none",
-                  backgroundColor: "chartreuse",
-                  borderRadius: "20px",
-                  width: "75px",
-                }}
-                onClick={() => this.props.history.replace("/auth")}
-              >
-                Login
-              </button>
-            </div>
-          )}
-        </div>
-
-        <div id="content">
-          <div id="head">
-            <h1 className="hname">{this.state.newList.map((x) => x.name)}</h1>
-            <h5 className="aname">
-              <i className="fa fa-map-marker" style={{ fontSize: 18 }}></i>{" "}
-              {this.state.newList.map((x) => x.address)}
-            </h5>
             <div id="items">
               <center>
                 <h2>Order Now</h2>
@@ -204,7 +178,7 @@ class Orders extends React.Component {
               )}
             </div>
           </div>
-          <div id="panel">
+          <div className="col-md-4">
             <div id="logo"></div>
             <div id="right">
               <div id="right-in">
@@ -234,16 +208,24 @@ class Orders extends React.Component {
                     </span>
                   </p>
                   <button
-                    disabled={this.state.total === 0 && this.props.email !== ""}
+                    disabled={
+                      this.state.total === 0 &&
+                      (this.props.email !== "" ||
+                        localStorage.getItem("token") !== null)
+                    }
                     style={
-                      this.state.total === 0 && this.props.email !== ""
+                      this.state.total === 0 &&
+                      (this.props.email !== "" ||
+                        localStorage.getItem("token") !== null)
                         ? { cursor: "no-drop" }
                         : { cursor: "pointer" }
                     }
                     id="pay"
                     onClick={this.placeOrder}
                   >
-                    {this.props.email ? "Place Order" : "Login to Order"}
+                    {this.props.email || localStorage.getItem("token") !== null
+                      ? "Place Order"
+                      : "Login to Order"}
                   </button>
                   <button
                     id="pay"

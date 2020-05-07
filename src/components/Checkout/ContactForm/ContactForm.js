@@ -72,7 +72,7 @@ const ContactForm = (props) => {
         placeholder: "Your E-Mail",
         readOnly: "readOnly",
       },
-      value: props.email,
+      value: props.email ? props.email : localStorage.getItem("email"),
       validation: {},
       valid: true,
       touched: false,
@@ -154,13 +154,13 @@ const ContactForm = (props) => {
       formValue[values] = orderForm[values].value;
     }
     const order = {
-      ingredients: props.ingredients,
-      price: props.price,
+      orderData: props.orderData,
       customerDetails: formValue,
       orderDate: new Date(),
-      userId: props.localId,
+      userId: props.localId ? props.localId : localStorage.getItem("userId"),
     };
-    props.onPurchaseBurger(order, props.token);
+    const a = props.token ? props.token : localStorage.getItem("token");
+    props.onPurchaseFood(order, a);
   };
 
   let formData = [];
@@ -174,7 +174,7 @@ const ContactForm = (props) => {
   );
   if (props.loading) {
     button = (
-      <Button btntype="Success" disabled="true">
+      <Button btntype="Success" disabled={true}>
         PLACING ORDER...
       </Button>
     );
@@ -214,6 +214,7 @@ const mapStateToProps = (state) => {
     email: state.authReducer.email,
     loading: state.orderReducer.loading,
     purchased: state.orderReducer.purchased,
+    orderData: state.orderReducer.orders,
   };
 };
 

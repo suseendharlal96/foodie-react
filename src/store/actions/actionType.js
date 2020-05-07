@@ -5,6 +5,15 @@ export const AUTH_LOGOUT = "AUTH_LOGOUT";
 
 export const INIT_ORDER = " INIT_ORDER";
 export const PLACE_ORDER = " PLACE_ORDER";
+export const PLACE_ORDER_SUCCESS = "PLACE_ORDER_SUCCESS";
+export const PLACE_ORDER_FAIL = "PLACE_ORDER_FAIL";
+export const ORDERS_FAILED = "ORDERS_FAILED";
+export const SET_FETCHED_ORDERS = "SET_FETCHED_ORDERS";
+
+export const INIT_PURCHASE = "INIT_PURCHASE";
+export const INIT_FETCH = "INIT_FETCH";
+export const INIT_DELETE = "INIT_DELETE";
+export const DELETE_ORDER = "DELETE_ORDER";
 
 // export const ADD_INGREDIENT = " ADD_INGREDIENT";
 // export const EDIT_INGREDIENT = " EDIT_INGREDIENT";

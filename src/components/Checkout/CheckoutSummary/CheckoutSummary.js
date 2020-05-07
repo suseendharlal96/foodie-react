@@ -12,17 +12,17 @@ const CheckoutSummary = (props) => {
       <div style={{ width: "100%", margin: "auto" }}>
         <h3>Hotel Name: {props.orderData.name}</h3>
         <p>Address: {props.orderData.address}</p>
-        {props.orderData.menu.map((m, index) => {
-          return (
-            <ol key={index}>
-              <li>
+        <ol>
+          {props.orderData.menu.map((m, index) => {
+            return (
+              <li key={index}>
                 Name: {m.name} -- Price: {"\u20B9"} {m.price}(1) -- Quantity:{" "}
                 {m.quantity} -- Total: {"\u20B9"}
                 {m.price * m.quantity}
               </li>
-            </ol>
-          );
-        })}
+            );
+          })}
+        </ol>
         <p>
           Total Price:{" "}
           <strong>

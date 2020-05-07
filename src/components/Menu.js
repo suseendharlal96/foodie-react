@@ -13,23 +13,28 @@ class Menu extends React.Component {
     console.log(this.props.ind);
     return (
       <div>
-        <h3 className="fname">{this.props.name}</h3>
+        <div className="row">
+          <span className="col-md-8">
+            <h3 className="fname">{this.props.name}</h3>
+          </span>
+          <span className="col-md-4">
+            <button
+              className="btn btn-success"
+              value={this.props.price}
+              onClick={() =>
+                this.props.action(
+                  this.props.price,
+                  this.state.quantity,
+                  this.props.ind
+                )
+              }
+            >
+              Add
+            </button>
+          </span>
+        </div>
         <div className="desc">
           <p>{this.props.desc}</p>
-          <button
-            className="btn btn-success"
-            
-            value={this.props.price}
-            onClick={() =>
-              this.props.action(
-                this.props.price,
-                this.state.quantity,
-                this.props.ind
-              )
-            }
-          >
-            Add
-          </button>
         </div>
         <br />
         <p className="amount">

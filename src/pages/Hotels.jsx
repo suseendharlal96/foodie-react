@@ -43,71 +43,43 @@ class Hotels extends React.Component {
 
   render() {
     return (
-      <div>
-        <div className="nav">
-          <div id="logo">
-            <h2>FOODIE</h2>
-          </div>
-          {this.props.email ? (
-            <div id="user">
-              <div style={{ color: "yellow" }} className="name">
-                {"Hello " + this.props.email}
-              </div>
-            </div>
-          ) : (
-            <div style={{ margin: "15px" }}>
-              <button
-                style={{
-                  outline:'none',
-                  backgroundColor: "chartreuse",
-                  borderRadius: "20px",
-                  width: "75px",
-                }}
-                onClick={() => this.props.history.replace("/auth")}
-              >
-                Login
-              </button>
-            </div>
-          )}
+      <div className="maincart">
+        <div id="menubar">
+          <h2 id="menu-title">Choose Your Favourite One</h2>
+          <p id="sort">
+            {" "}
+            Sort by &nbsp; &nbsp;
+            <select
+              id="sort-metrics"
+              defaultValue={"none"}
+              onChange={(e) => this.sortMenu(e)}
+            >
+              <option value="none" disabled hidden>
+                None
+              </option>
+              <option className="sort-option" value="name">
+                Name
+              </option>
+              <option className="sort-option" value="rating">
+                Ratings
+              </option>
+              <option className="sort-option" value="review">
+                Reviews
+              </option>
+            </select>
+          </p>
         </div>
-
-        <div className="maincart">
-          <div id="menubar">
-            <h2 id="menu-title">Choose Your Favourite One</h2>
-            <p id="sort">
-              {" "}
-              Sort by &nbsp; &nbsp;
-              <select
-                id="sort-metrics"
-                defaultValue={"none"}
-                onChange={(e) => this.sortMenu(e)}
-              >
-                <option value="none" disabled hidden>
-                  None
-                </option>
-                <option className="sort-option" value="name">
-                  Name
-                </option>
-                <option className="sort-option" value="rating">
-                  Ratings
-                </option>
-                <option className="sort-option" value="review">
-                  Reviews
-                </option>
-              </select>
-            </p>
-          </div>
-          {this.state.list.map((x, i) => (
+        {this.state.list.map((x, i) => (
+          <div style={{ marginTop: "10%" }} key={i}>
             <RestaurantCard
-              key={i}
               thumbnail_image={x.thumbnail_image}
               name={x.name}
               cuisines={x.cuisines}
               rating={x.rating}
               reviews={x.reviews}
             />
-          ))}
-        </div>
+          </div>
+        ))}
       </div>
     );
   }

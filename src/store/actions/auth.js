@@ -25,6 +25,7 @@ export const authInit = () => {
 };
 
 export const logout = () => {
+  localStorage.clear();
   return {
     type: actionType.AUTH_LOGOUT,
   };
@@ -34,6 +35,7 @@ export const authLogout = (token) => {
   console.log(token, typeof token);
   return (dispatch) => {
     setTimeout(() => {
+      localStorage.clear();
       dispatch(logout());
     }, +token.expiresIn * 10000);
   };
@@ -62,6 +64,9 @@ export const authStart = (isSignup, data, routeData, orderData) => {
         console.log(res);
         console.log(res.data);
         dispatch(loginSuccess(res.data, loginData.email));
+        localStorage.setItem("userId", res.data.localId);
+        localStorage.setItem("token", res.data.idToken);
+        localStorage.setItem("email", loginData.email);
         dispatch(authLogout(res.data));
         if (orderData && orderData.name) {
           routeData.history.replace("/checkout");
