@@ -7,6 +7,7 @@ import styles from "./Order.module.css";
 import Button from "../../pages/Button/Button";
 
 const Order = (props) => {
+  console.log(props);
   const [continuePurchase, setcontinuePurchase] = useState(false);
 
   const closeModalHandler = () => {
