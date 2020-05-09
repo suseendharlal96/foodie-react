@@ -17,6 +17,13 @@ const orderReducer = (state = initState, action) => {
         error: null,
         purchased: false,
       };
+    case actionType.AUTH_LOGOUT:
+      return {
+        ...state,
+        orders: null,
+        purchased: false,
+        error: null,
+      };
     case actionType.INIT_PURCHASE:
       return {
         ...state,

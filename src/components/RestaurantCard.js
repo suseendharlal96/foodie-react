@@ -9,12 +9,21 @@ class RestaurantCard extends React.Component {
     };
   }
 
+  navigateOrder = () => {
+    if (this.props.history.location.pathname.search("edit") !== -1) {
+      this.props.history.push(
+        `/order/${this.props.name}/${
+          this.props.history.location.pathname.split("/")[2]
+        }/edit`
+      );
+    } else {
+      this.props.history.push(`/order/${this.props.name}`);
+    }
+  };
+
   render() {
     return (
-      <div
-        className="cart"
-        onClick={() => this.props.history.push(`/order/${this.props.name}`)}
-      >
+      <div className="cart" onClick={this.navigateOrder}>
         <center>
           <img src={this.props.thumbnail_image} alt={this.props.name} />
         </center>

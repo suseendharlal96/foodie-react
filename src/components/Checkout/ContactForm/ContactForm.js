@@ -98,13 +98,17 @@ const ContactForm = (props) => {
   useEffect(() => {
     console.log(props);
     const orderId = props.history.location.pathname.split("/")[3];
-    const updateData = props.orders.find((data) => data.id === orderId);
-    const formValue = { ...orderForm };
-    for (let key in updateData.customerDetails) {
-      formValue[key].value = updateData.customerDetails[key];
+    if (orderId) {
+      const updateData = props.orders.find((data) => data.id === orderId);
+      if (updateData) {
+        const formValue = { ...orderForm };
+        for (let key in updateData.customerDetails) {
+          formValue[key].value = updateData.customerDetails[key];
+        }
+        setOrderForm(formValue);
+        setformIsValid(true);
+      }
     }
-    setOrderForm(formValue);
-    setformIsValid(true);
   }, []);
 
   const checkValidity = (value, rules) => {

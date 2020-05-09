@@ -23,6 +23,10 @@ const Order = (props) => {
     props.history.replace(`/order/${props.orderData.name}/${props.id}/edit`);
   };
 
+  const editHotel = () => {
+    props.history.replace(`/hotel/${props.id}/edit`);
+  };
+
   const ingredientOutput = props.orderData.menu.map((ig) => {
     return (
       <span
@@ -62,11 +66,14 @@ const Order = (props) => {
         <strong>{new Date(props.date).toString()}</strong>
       </p>
       <div>
-        <Button btntype="Success" clicked={details}>
+        <button className="btn btn-primary" onClick={details}>
           Details
-        </Button>
+        </button>
         <Button btntype="Success" clicked={edit}>
-          Edit Order
+          Edit Order(Same hotel)
+        </Button>
+        <Button btntype="Success" clicked={editHotel}>
+          Edit Order(Different hotel)
         </Button>
         <Route
           path={props.match.path + "/details"}

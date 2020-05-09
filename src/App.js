@@ -22,6 +22,7 @@ function App() {
           <Route path="/orders" component={MyOrder}></Route>
           <Route path="/logout" component={Logout}></Route>
           <Route exact path="/order/:id" component={Orders}></Route>
+          <Route exact path="/hotel/:id/edit" component={Hotels}></Route>
           <Route exact path="/order/:name/:id/edit" component={Orders}></Route>
           {/* <Redirect from="/*" to="/" /> */}
         </Layout>
