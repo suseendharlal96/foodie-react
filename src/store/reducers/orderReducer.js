@@ -34,7 +34,7 @@ const orderReducer = (state = initState, action) => {
     case actionType.SET_FETCHED_ORDERS:
       return {
         ...state,
-        actualOrders: state.actualOrders.concat(action.orderData),
+        actualOrders: action.orderData,
         loading: false,
         purchased: false,
         error: null,
@@ -59,7 +59,7 @@ const orderReducer = (state = initState, action) => {
         loading: true,
         purchased: false,
         error: null,
-        actualOrders: (state.actualOrders = []),
+        // actualOrders: (state.actualOrders = []),
       };
     case actionType.INIT_DELETE:
       return {
@@ -76,6 +76,16 @@ const orderReducer = (state = initState, action) => {
         ),
         loading: false,
         purchased: false,
+        error: null,
+      };
+    case actionType.UPDATE_ORDER:
+      return {
+        ...state,
+        actualOrders: state.actualOrders.filter((data) =>
+          data.id === action.id ? action.updatedData : data
+        ),
+        loading: false,
+        purchased: true,
         error: null,
       };
     default:

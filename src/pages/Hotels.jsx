@@ -70,8 +70,9 @@ class Hotels extends React.Component {
           </p>
         </div>
         {this.state.list.map((x, i) => (
-          <div style={{ marginTop: "10%" }} key={i}>
+          <div style={{ marginTop: "10%", cursor: "pointer" }} key={i}>
             <RestaurantCard
+              {...this.props}
               thumbnail_image={x.thumbnail_image}
               name={x.name}
               cuisines={x.cuisines}

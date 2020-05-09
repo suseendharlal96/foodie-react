@@ -29,7 +29,6 @@ export const initPurchase = () => {
 };
 
 export const purchaseFood = (orderData, token) => {
-  console.log(orderData, token);
   return (dispatch) => {
     dispatch(initPurchase());
     axios
@@ -42,7 +41,6 @@ export const purchaseFood = (orderData, token) => {
         dispatch(setOrderSuccess(order));
       })
       .catch((error) => {
-        console.log(error);
         dispatch(setOrderFail());
       });
   };
@@ -51,7 +49,7 @@ export const purchaseFood = (orderData, token) => {
 export const setFetchedOrders = (orderData) => {
   return {
     type: actionType.SET_FETCHED_ORDERS,
-    orderData: orderData,
+    orderData: orderData.reverse(),
   };
 };
 
@@ -68,7 +66,6 @@ export const initFetch = () => {
 };
 
 export const fetchOrders = (token, userId) => {
-  console.log(token, userId);
   return (dispatch) => {
     dispatch(initFetch());
     const queryParams =
@@ -76,15 +73,13 @@ export const fetchOrders = (token, userId) => {
     axios
       .get("https://foodie-react.firebaseio.com/orders.json" + queryParams)
       .then((res) => {
-        console.log(res);
         const a = [];
         for (let key in res.data) {
           a.push({ ...res.data[key], id: key });
         }
-        dispatch(setFetchedOrders(a.reverse()));
+        dispatch(setFetchedOrders(a));
       })
       .catch((err) => {
-        console.log(err, err.response.data.error);
         dispatch(setFetchedOrdersFail("Unauthenticated to access"));
       });
   };
@@ -94,6 +89,14 @@ export const deleteStateOrder = (id) => {
   return {
     type: actionType.DELETE_ORDER,
     delId: id,
+  };
+};
+
+export const updateStateOrder = (data, id) => {
+  return {
+    type: actionType.UPDATE_ORDER,
+    updatedData: data,
+    id: id,
   };
 };
 
@@ -115,7 +118,22 @@ export const deleteOrder = (id, obj, token) => {
         obj.history.replace("/orders");
       })
       .catch((err) => {
-        console.log(err);
+      });
+  };
+};
+
+export const updateOrder = (obj, token, id) => {
+  return (dispatch) => {
+    dispatch(initPurchase());
+    axios
+      .put(
+        `https://foodie-react.firebaseio.com/orders/${id}.json?auth=${token}`,
+        obj
+      )
+      .then((res) => {
+        dispatch(updateStateOrder(obj, id));
+      })
+      .catch((err) => {
       });
   };
 };

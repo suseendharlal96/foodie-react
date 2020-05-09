@@ -96,7 +96,6 @@ const LoginPage = (props) => {
     copy[id] = deepCopy;
     let formIsValid = true;
     for (let inputIdentifier in copy) {
-      console.log(copy.email, copy.email.valid);
       formIsValid = copy[inputIdentifier].valid && formIsValid;
     }
     setAuthForm(copy);
@@ -188,7 +187,6 @@ const LoginPage = (props) => {
 
   const formSubmit = (event, isSignup) => {
     event.preventDefault();
-    console.log(isSignup);
     props.submitForm(isSignup, authForm, props, props.orderData);
   };
 

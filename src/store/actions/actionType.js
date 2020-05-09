@@ -14,6 +14,7 @@ export const INIT_PURCHASE = "INIT_PURCHASE";
 export const INIT_FETCH = "INIT_FETCH";
 export const INIT_DELETE = "INIT_DELETE";
 export const DELETE_ORDER = "DELETE_ORDER";
+export const UPDATE_ORDER = "UPDATE_ORDER";
 
 // export const ADD_INGREDIENT = " ADD_INGREDIENT";
 // export const EDIT_INGREDIENT = " EDIT_INGREDIENT";

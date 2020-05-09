@@ -14,9 +14,16 @@ const Checkout = (props) => {
   }, []);
 
   const formSubmit = () => {
-    console.log("form");
     setContinuePurchase(true);
-    props.history.replace("/checkout/contact-form");
+    if (props.location.pathname.search("edit") !== -1) {
+      props.history.replace(
+        `/checkout/contact-form/${
+          props.location.pathname.split("/")[2]
+        }/edit`
+      );
+    } else {
+      props.history.replace("/checkout/contact-form");
+    }
   };
 
   const closeModalHandler = () => {

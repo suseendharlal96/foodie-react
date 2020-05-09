@@ -5,10 +5,6 @@ import { connect } from "react-redux";
 import Button from "../../Button/Button";
 
 const orderDetail = (props) => {
-  console.log(props.date);
-  // console.log(props.id);
-  // console.log(props.ingredients);
-  // console.log(props.price);
   let detail;
   if (props) {
     let button;

@@ -19,7 +19,9 @@ const Order = (props) => {
     props.history.replace("/orders/details");
   };
 
-  console.log(props);
+  const edit = () => {
+    props.history.replace(`/order/${props.orderData.name}/${props.id}/edit`);
+  };
 
   const ingredientOutput = props.orderData.menu.map((ig) => {
     return (
@@ -62,6 +64,9 @@ const Order = (props) => {
       <div>
         <Button btntype="Success" clicked={details}>
           Details
+        </Button>
+        <Button btntype="Success" clicked={edit}>
+          Edit Order
         </Button>
         <Route
           path={props.match.path + "/details"}

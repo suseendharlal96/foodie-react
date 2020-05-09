@@ -22,14 +22,16 @@ class Orders extends React.Component {
     };
   }
 
-  componentWillMount() {
-    console.log("hotel", this.props.history);
-    const hotel = this.props.history.location.pathname.slice(7);
-    console.log(hotel);
+  componentDidMount() {
+    this.initOrderData();
+  }
+
+  initOrderData = () => {
+    const hotel = this.props.history.location.pathname.split("/")[2];
+    const editId = this.props.history.location.pathname.split("/")[3];
     const List = this.state.list.filter(function (rec) {
       return rec.name === hotel;
     });
-    console.log(List);
     const arr = [];
     List.map((list) => {
       arr.push({
@@ -47,20 +49,40 @@ class Orders extends React.Component {
         }),
       });
     });
-    console.log(arr);
     this.setState({
       id: hotel,
       newList: arr,
     });
-  }
+    if (editId) {
+      this.initEditData(editId, arr);
+    }
+  };
+
+  initEditData = (editId, arr) => {
+    const a = this.props.orders.find((data) => data.id === editId).orderData;
+    let updatedMenu = [];
+    if (arr && arr.length) {
+      a.menu.map((m) => {
+        const ind = arr[0].menu.findIndex((data) => data.id === m.id);
+        if (ind !== -1) {
+          arr[0].menu[ind] = m;
+        }
+      });
+      updatedMenu = arr[0].menu;
+      if (a) {
+        this.setState({
+          newList: [
+            { id: a.id, name: a.name, address: a.address, menu: updatedMenu },
+          ],
+        });
+        this.setState({ total: a.total });
+      }
+    }
+  };
 
   childHandler = (ChildPrice, ChildQuantity, id) => {
-    console.log(id);
-    console.log(this.state.newList);
     const b = this.calcQuantity("add", id);
-    console.log(b);
     const totalPrice = +this.state.price + ChildPrice * ChildQuantity;
-    console.log(totalPrice);
     this.setState({
       newList: b,
     });
@@ -68,9 +90,7 @@ class Orders extends React.Component {
   };
 
   incrementQuantity = (id) => {
-    console.log(id);
     const b = this.calcQuantity("add", id);
-    console.log(b);
     this.setState({
       newList: b,
     });
@@ -94,7 +114,6 @@ class Orders extends React.Component {
         }
       });
     });
-    console.log(b);
     return b;
   };
 
@@ -109,7 +128,6 @@ class Orders extends React.Component {
   };
 
   placeOrder = () => {
-    console.log(this.state.newList[0]);
     const a = this.state.newList[0];
     const obj = {
       menu: [],
@@ -125,24 +143,22 @@ class Orders extends React.Component {
         obj.menu.push(m);
       }
     });
-    console.log(obj);
 
     this.props.initOrder(obj);
     if (this.props.email || localStorage.getItem("token") !== null) {
-      this.props.history.replace("/checkout");
+      if (this.props.history.location.pathname.split("/")[3]) {
+        this.props.history.replace(
+          `/checkout/${this.props.location.pathname.split("/")[3]}/edit`
+        );
+      } else {
+        this.props.history.replace("/checkout");
+      }
     } else {
       this.props.history.replace("/auth");
     }
   };
 
   render() {
-    let cartArr = [];
-    this.state.newList[0].menu.map((m, i) => {
-      if (m.quantity >= 1) {
-        cartArr.push(m);
-      }
-    });
-    console.log("cart", cartArr);
     return (
       <div id="content">
         <div className="row">
@@ -183,26 +199,28 @@ class Orders extends React.Component {
             <div id="right">
               <div id="right-in">
                 <h4>My Cart</h4>
-                {cartArr.length
-                  ? cartArr.map((cart, index) => {
-                      return (
-                        <MyCart
-                          key={index}
-                          ind={cart.id}
-                          name={cart.name}
-                          price={cart.price}
-                          quantity={cart.quantity}
-                          increment={(ind) => this.incrementQuantity(ind)}
-                          decrement={(ind) => this.decrementQuantity(ind)}
-                        ></MyCart>
-                      );
+                {this.state.newList.length
+                  ? this.state.newList[0].menu.map((cart, index) => {
+                      if (cart.quantity >= 1) {
+                        return (
+                          <MyCart
+                            key={index}
+                            ind={cart.id}
+                            name={cart.name}
+                            price={cart.price}
+                            quantity={cart.quantity}
+                            increment={(ind) => this.incrementQuantity(ind)}
+                            decrement={(ind) => this.decrementQuantity(ind)}
+                          ></MyCart>
+                        );
+                      }
                     })
                   : null}
 
                 <div id="total">
                   <p id="total">
                     {" "}
-                    Total amount:
+                    Grand Total:
                     <span className="spn">
                       {"\u20B9"} {this.state.total}
                     </span>
@@ -246,6 +264,7 @@ class Orders extends React.Component {
 const mapStateToProps = (state) => {
   return {
     email: state.authReducer.email,
+    orders: state.orderReducer.actualOrders,
   };
 };
 

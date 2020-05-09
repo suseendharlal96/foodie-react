@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { connect } from "react-redux";
 
 import * as orderActions from "../../../store/actions/index";
@@ -95,9 +95,17 @@ const ContactForm = (props) => {
 
   const [formIsValid, setformIsValid] = useState(false);
 
-  if (props.purchased) {
-    props.history.replace("/success");
-  }
+  useEffect(() => {
+    console.log(props);
+    const orderId = props.history.location.pathname.split("/")[3];
+    const updateData = props.orders.find((data) => data.id === orderId);
+    const formValue = { ...orderForm };
+    for (let key in updateData.customerDetails) {
+      formValue[key].value = updateData.customerDetails[key];
+    }
+    setOrderForm(formValue);
+    setformIsValid(true);
+  }, []);
 
   const checkValidity = (value, rules) => {
     let isValid = true;
@@ -140,7 +148,6 @@ const ContactForm = (props) => {
     copy[id] = deepCopy;
     let formIsValid = true;
     for (let inputIdentifier in copy) {
-      console.log(copy.email, copy.email.valid);
       formIsValid = copy[inputIdentifier].valid && formIsValid;
     }
     setOrderForm(copy);
@@ -160,7 +167,18 @@ const ContactForm = (props) => {
       userId: props.localId ? props.localId : localStorage.getItem("userId"),
     };
     const a = props.token ? props.token : localStorage.getItem("token");
-    props.onPurchaseFood(order, a);
+    if (props.location.pathname.search("edit") !== -1) {
+      const orderId = props.history.location.pathname.split("/")[3];
+      const order = {
+        orderData: props.orderData,
+        customerDetails: formValue,
+        orderDate: new Date(),
+        userId: props.localId ? props.localId : localStorage.getItem("userId"),
+      };
+      props.updateFood(order, a, orderId);
+    } else {
+      props.onPurchaseFood(order, a);
+    }
   };
 
   let formData = [];
@@ -215,6 +233,7 @@ const mapStateToProps = (state) => {
     loading: state.orderReducer.loading,
     purchased: state.orderReducer.purchased,
     orderData: state.orderReducer.orders,
+    orders: state.orderReducer.actualOrders,
   };
 };
 
@@ -222,6 +241,8 @@ const mapDispatchToProps = (dispatch) => {
   return {
     onPurchaseFood: (orderData, token) =>
       dispatch(orderActions.purchaseFood(orderData, token)),
+    updateFood: (orderData, token, id) =>
+      dispatch(orderActions.updateOrder(orderData, token, id)),
   };
 };
 

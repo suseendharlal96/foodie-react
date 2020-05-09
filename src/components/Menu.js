@@ -10,7 +10,6 @@ class Menu extends React.Component {
   }
 
   render() {
-    console.log(this.props.ind);
     return (
       <div>
         <div className="row">

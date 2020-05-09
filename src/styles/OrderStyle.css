@@ -138,8 +138,7 @@ body {
 }
 
 .spn {
-  float: right;
-  margin-top: 12spx;
+  margin-left: 10px;
 }
 #tx-w {
   height: 30px;

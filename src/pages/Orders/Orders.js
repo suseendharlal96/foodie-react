@@ -10,7 +10,6 @@ const Orders = (props) => {
   const [dateCheck, setdateCheck] = useState("");
 
   useEffect(() => {
-    console.log(props.token);
     if (!props.token) {
       props.fetchOrders(
         localStorage.getItem("token"),
@@ -48,7 +47,6 @@ const Orders = (props) => {
   };
 
   const deleteHandler = (orderId) => {
-    console.log(orderId);
     const token = props.token ? props.token : localStorage.getItem("token");
     props.deleteOrders(orderId, { ...props }, token);
   };
@@ -121,7 +119,6 @@ const Orders = (props) => {
   } else if (!props.error) {
     filter = <p>No Orders found!</p>;
   }
-  console.log(props.orders);
   return (
     <div>
       {error}

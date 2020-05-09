@@ -32,7 +32,6 @@ export const logout = () => {
 };
 
 export const authLogout = (token) => {
-  console.log(token, typeof token);
   return (dispatch) => {
     setTimeout(() => {
       localStorage.clear();
@@ -42,8 +41,6 @@ export const authLogout = (token) => {
 };
 
 export const authStart = (isSignup, data, routeData, orderData) => {
-  console.log(orderData);
-  console.log(isSignup, data);
   const loginData = {
     email: data.email.value,
     password: data.password.value,
@@ -57,11 +54,9 @@ export const authStart = (isSignup, data, routeData, orderData) => {
       url =
         "https://identitytoolkit.googleapis.com/v1/accounts:signUp?key=AIzaSyB7PnaRbqVCROuKHtA0B6_GPsL2V_vN3k0";
     }
-    console.log(url);
     axios
       .post(url, loginData)
       .then((res) => {
-        console.log(res);
         console.log(res.data);
         dispatch(loginSuccess(res.data, loginData.email));
         localStorage.setItem("userId", res.data.localId);

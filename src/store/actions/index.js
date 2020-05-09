@@ -4,4 +4,5 @@ export {
   purchaseFood,
   fetchOrders,
   deleteOrder,
+  updateOrder,
 } from "./orderaction";
