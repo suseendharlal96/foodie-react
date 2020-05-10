@@ -3,7 +3,6 @@ import { connect } from "react-redux";
 
 import "../styles/LoginStyle.css";
 import Front from "../images/FB.jpg";
-import AppLogo from "../images/logo.jpg";
 import Input from "./Input/Input";
 import Button from "./Button/Button";
 import styles from "./Auth/Auth.module.css";

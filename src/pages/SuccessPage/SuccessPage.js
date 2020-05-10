@@ -2,6 +2,7 @@ import React from "react";
 
 import classes from "./SuccessPage.module.css";
 import Button from "../Button/Button";
+import Front from "../../images/FB.jpg";
 
 const success = (props) => {
   return (
@@ -16,6 +17,7 @@ const success = (props) => {
       >
         Go to My Orders!
       </Button>
+      <img src={Front} className="img-fluid" alt="Banner" />
     </div>
   );
 };

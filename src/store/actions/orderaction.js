@@ -117,12 +117,12 @@ export const deleteOrder = (id, obj, token) => {
         dispatch(deleteStateOrder(id));
         obj.history.replace("/orders");
       })
-      .catch((err) => {
-      });
+      .catch((err) => {});
   };
 };
 
 export const updateOrder = (obj, token, id) => {
+  console.log(id);
   return (dispatch) => {
     dispatch(initPurchase());
     axios
@@ -133,7 +133,6 @@ export const updateOrder = (obj, token, id) => {
       .then((res) => {
         dispatch(updateStateOrder(obj, id));
       })
-      .catch((err) => {
-      });
+      .catch((err) => {});
   };
 };

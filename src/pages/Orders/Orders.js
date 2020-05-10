@@ -12,6 +12,7 @@ import Button from "../../pages/Button/Button";
 const Orders = (props) => {
   const [priceCheck, setpriceCheck] = useState("");
   const [dateCheck, setdateCheck] = useState("");
+  const [alphaCheck, setalphaCheck] = useState("");
   const [mode, setMode] = useState("list");
 
   useEffect(() => {
@@ -33,14 +34,17 @@ const Orders = (props) => {
   };
 
   const sort = (event) => {
+    console.log(event.target.value);
     if (event.target.value === "low") {
       props.orders.sort((a, b) => +a.orderData.total - +b.orderData.total);
       setpriceCheck(event.target.value);
       setdateCheck("");
+      setalphaCheck("");
     } else if (event.target.value === "high") {
       props.orders.sort((a, b) => +b.orderData.total - +a.orderData.total);
       setpriceCheck(event.target.value);
       setdateCheck("");
+      setalphaCheck("");
     } else if (event.target.value === "old") {
       props.orders.sort(
         (a, b) =>
@@ -48,6 +52,7 @@ const Orders = (props) => {
       );
       setpriceCheck("");
       setdateCheck(event.target.value);
+      setalphaCheck("");
     } else if (event.target.value === "new") {
       props.orders.sort(
         (a, b) =>
@@ -55,7 +60,30 @@ const Orders = (props) => {
       );
       setpriceCheck("");
       setdateCheck(event.target.value);
+      setalphaCheck("");
+    } else if (event.target.value === "asc") {
+      console.log(1);
+      props.orders.sort((a, b) =>
+        compareName(a.orderData.name, b.orderData.name)
+      );
+      setalphaCheck(event.target.value);
+      setpriceCheck("");
+      setdateCheck("");
+    } else if (event.target.value === "desc") {
+      console.log(2);
+      props.orders.sort((a, b) =>
+        compareName(b.orderData.name, a.orderData.name)
+      );
+      setalphaCheck(event.target.value);
+      setpriceCheck("");
+      setdateCheck("");
     }
+  };
+
+  const compareName = (a, b) => {
+    a = a.toLowerCase();
+    b = b.toLowerCase();
+    return a < b ? -1 : a > b ? 1 : 0;
   };
 
   const deleteHandler = (orderId) => {
@@ -83,17 +111,26 @@ const Orders = (props) => {
       <div>
         <h2>My Orders:</h2>
         <div style={{ fontWeight: "bold" }}>Filter By:</div>
-        <div className="float-right">
-          <label>Display Mode:</label>
+        <div className="float-right" style={{ marginRight: "20px" }}>
+          <label style={{ marginRight: "15px" }} htmlFor="dispmode">
+            Display Mode:
+          </label>
           <span>
-            <select value={mode} onChange={changeMode}>
+            <select
+              name="dispmode"
+              id="dispmode"
+              value={mode}
+              onChange={changeMode}
+            >
               <option value="list">List</option>
               <option value="chart">Chart</option>
             </select>
           </span>
         </div>
         <span>
-          <label>Date:</label>
+          <label>
+            <strong>Date:</strong>
+          </label>
           <br />
           old:
           <input
@@ -114,7 +151,32 @@ const Orders = (props) => {
         </span>
         <br />
         <span>
-          <label>Price:</label>
+          <label>
+            <strong>Hotel Name:</strong>
+          </label>
+          <br />
+          A-z:
+          <input
+            type="radio"
+            name="price"
+            value="asc"
+            onChange={(event) => sort(event)}
+            checked={alphaCheck === "asc"}
+          />
+          Z-a:
+          <input
+            type="radio"
+            name="price"
+            value="desc"
+            onChange={(event) => sort(event)}
+            checked={alphaCheck === "desc"}
+          />
+        </span>
+        <br />
+        <span>
+          <label>
+            <strong>Price:</strong>
+          </label>
           <br />
           <span>
             low:
@@ -138,7 +200,9 @@ const Orders = (props) => {
       </div>
     );
   } else if (!props.error) {
-    filter = <p>No Orders found!</p>;
+    filter = <p>Loading...</p>;
+  } else {
+    filter = <p>No orders placed yet!</p>;
   }
   let a = [];
   let ind = 1;
@@ -148,6 +212,7 @@ const Orders = (props) => {
   console.log("a", a);
   let hotel = [];
   let hotelOrder = [];
+  let hotelPrice = [];
   let bgColors = [];
   while (bgColors.length < 12) {
     do {
@@ -170,6 +235,7 @@ const Orders = (props) => {
       if (ind === 1) {
         hotel.push(or.orderData.name);
         hotelOrder.push(0);
+        hotelPrice.push(0);
         ind = ind + 1;
         console.log(hotel, hotelOrder);
       } else {
@@ -177,12 +243,13 @@ const Orders = (props) => {
         if (hIndex === -1) {
           hotel.push(or.orderData.name);
           hotelOrder.push(0);
+          hotelPrice.push(0);
         }
       }
       if (hotel && hotel.length) {
         const index = hotel.findIndex((data) => data === or.orderData.name);
         hotelOrder[index] = hotelOrder[index] + 1;
-        console.log(hotel, hotelOrder);
+        hotelPrice[index] = hotelPrice[index] + or.orderData.total;
       }
     });
   }
@@ -221,6 +288,26 @@ const Orders = (props) => {
             label={"Orders(based on hotel)"}
             hotel={hotel}
             hotelOrder={hotelOrder}
+            bgColors={bgColors}
+            hoverColors={hoverColors}
+          />
+        </div>
+      </div>
+      <div className="row">
+        <div className="col-md-6">
+          <BarChart
+            label={"Orders(based on hotel & price)"}
+            hotel={hotel}
+            hotelOrder={hotelPrice}
+            bgColors={bgColors}
+            hoverColors={hoverColors}
+          />
+        </div>
+        <div className="col-md-6">
+          <PieChart
+            label={"Orders(based on hotel & price)"}
+            hotel={hotel}
+            hotelOrder={hotelPrice}
             bgColors={bgColors}
             hoverColors={hoverColors}
           />

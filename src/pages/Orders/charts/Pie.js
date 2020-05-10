@@ -8,7 +8,6 @@ const PieChart = (props) => {
         labels: props.hotel,
         datasets: [
           {
-            label: "Orders",
             backgroundColor: props.bgColors,
             hoverBackgroundColor: props.hoverColors,
             data: props.hotelOrder,

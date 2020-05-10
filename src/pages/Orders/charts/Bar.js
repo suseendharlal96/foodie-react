@@ -8,7 +8,7 @@ const BarChart = (props) => {
         labels: props.hotel,
         datasets: [
           {
-            label: "Orders",
+            label: props.label.search('price')!==-1?'Total ordered price': 'Orders',
             backgroundColor: props.bgColors,
             hoverBackgroundColor: props.hoverColors,
             data: props.hotelOrder,
