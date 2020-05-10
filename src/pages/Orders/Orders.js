@@ -255,10 +255,10 @@ const Orders = (props) => {
     });
   }
 
-  const listData =
-    props.token || localStorage.getItem("token") !== null
-      ? props.orders.map((order) => {
-          return (
+  const listData = (
+    <div style={{ height: "396px", overflow: "auto" }}>
+      {props.token || localStorage.getItem("token") !== null
+        ? props.orders.map((order) => (
             <Order
               {...props}
               key={order.id}
@@ -268,12 +268,13 @@ const Orders = (props) => {
               orderData={order.orderData}
               delete={() => deleteHandler(order.id)}
             />
-          );
-        })
-      : null;
+          ))
+        : null}
+    </div>
+  );
 
   const chartData = (
-    <div className="col-md-12">
+    <div className="col-md-12" style={{ height: "396px", overflow: "auto" }}>
       <div className="row">
         <div className="col-md-6">
           <BarChart
