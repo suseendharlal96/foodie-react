@@ -5,6 +5,7 @@ import { connect } from "react-redux";
 
 import BarChart from "./charts/Bar";
 import PieChart from "./charts/Pie";
+import LineChart from "./charts/Line";
 import Order from "../Orders/Order";
 import * as action from "../../store/actions/index";
 import Button from "../../pages/Button/Button";
@@ -293,6 +294,7 @@ const Orders = (props) => {
           />
         </div>
       </div>
+      <hr />
       <div className="row">
         <div className="col-md-6">
           <BarChart
@@ -313,6 +315,28 @@ const Orders = (props) => {
           />
         </div>
       </div>
+      <hr />
+      <div className="row">
+        <div className="col-md-6">
+          <LineChart
+            label={"Orders(based on hotel)"}
+            hotel={hotel}
+            hotelOrder={hotelOrder}
+            bgColors={bgColors}
+            hoverColors={hoverColors}
+          />
+        </div>
+        <div className="col-md-6">
+          <LineChart
+            label={"Orders(based on hotel & price)"}
+            hotel={hotel}
+            hotelOrder={hotelPrice}
+            bgColors={bgColors}
+            hoverColors={hoverColors}
+          />
+        </div>
+      </div>
+      <hr />
       <div className="row">
         <div className="col-md-6">
           <BarChart

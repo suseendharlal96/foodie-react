@@ -1,13 +1,15 @@
 import React from "react";
-import { Bar } from "react-chartjs-2";
+import { Line } from "react-chartjs-2";
 
-const BarChart = (props) => {
+const LineChart = (props) => {
   return (
-    <Bar
+    <Line
       data={{
         labels: props.hotel,
         datasets: [
           {
+            fill: false,
+            lineTension: 0.5,
             label:
               props.label.search("price") !== -1
                 ? "Total ordered price"
@@ -33,4 +35,4 @@ const BarChart = (props) => {
   );
 };
 
-export default BarChart;
+export default LineChart;
