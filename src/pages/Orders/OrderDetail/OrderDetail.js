@@ -23,33 +23,48 @@ const orderDetail = (props) => {
     }
     detail = (
       <div>
-        <h2>Order Detail:</h2>
-        <p>Ordered on: {new Date(props.date).toString()}</p>
-        <p>Customer Details:</p>
+        <h2 style={{ color: "var(--primaryText)" }}>Order Detail:</h2>
+        <p style={{ color: "var(--primaryTheme)" }}>
+          Ordered on:{" "}
+          <strong style={{ color: "var(--primaryText)" }}>
+            {new Date(props.date).toString()}
+          </strong>
+        </p>
+        <p style={{ color: "var(--primaryTheme)" }}>Customer Details:</p>
         {Object.keys(props.custDetails).map((ing) => {
           return (
-            <li key={ing}>
-              {ing} <span>:{props.custDetails[ing]}</span>
+            <li style={{ color: "var(--primaryTheme)" }} key={ing}>
+              {ing}{" "}
+              <span style={{ color: "var(--primaryText)" }}>
+                :{props.custDetails[ing]}
+              </span>
             </li>
           );
         })}
-        <p>Items ordered:</p>
+        <p style={{ color: "var(--primaryTheme)" }}>Items ordered:</p>
         {props.menu.map((ing, i) => {
           return (
             <li key={i}>
-              <strong> {ing.name}</strong>
-              <span>
+              <strong style={{ color: "var(--primaryText)" }}>
+                {" "}
+                {ing.name}
+              </strong>
+              <span style={{ color: "var(--primaryTheme)" }}>
                 price:
-                <strong>
+                <strong style={{ color: "var(--primaryText)" }}>
                   {"\u20B9"} {ing.price}(1)
                 </strong>
               </span>
-              <span>
-                quantity:<strong> {ing.quantity}</strong>
+              <span style={{ color: "var(--primaryTheme)" }}>
+                quantity:
+                <strong style={{ color: "var(--primaryText)" }}>
+                  {" "}
+                  {ing.quantity}
+                </strong>
               </span>
-              <span>
+              <span style={{ color: "var(--primaryTheme)" }}>
                 total:
-                <strong>
+                <strong style={{ color: "var(--primaryText)" }}>
                   {" "}
                   {"\u20B9"}
                   {ing.quantity * ing.price}
@@ -59,9 +74,9 @@ const orderDetail = (props) => {
           );
         })}
         <hr />
-        <p>
+        <p style={{ color: "var(--primaryTheme)" }}>
           Grand Total:{" "}
-          <strong>
+          <strong style={{ color: "var(--primaryText)" }}>
             {"\u20B9"}
             {props.price.toFixed(2)}
           </strong>

@@ -1,13 +1,14 @@
 import React from "react";
-import { Pie } from "react-chartjs-2";
+import { Doughnut } from "react-chartjs-2";
 
 const PieChart = (props) => {
   return (
-    <Pie
+    <Doughnut
       data={{
         labels: props.hotel,
         datasets: [
           {
+            fontColor: "green",
             backgroundColor: props.bgColors,
             hoverBackgroundColor: props.hoverColors,
             data: props.hotelOrder,
@@ -18,9 +19,11 @@ const PieChart = (props) => {
         title: {
           display: true,
           text: props.label,
+          fontColor: "green",
           fontSize: 20,
         },
         legend: {
+          fontColor: "red",
           display: true,
           position: "right",
         },

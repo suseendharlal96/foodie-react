@@ -5,13 +5,17 @@ class MyCart extends React.Component {
     console.log("asdsa", this.props);
     return (
       <div>
-        <p key={this.props.name} id="pitem">
+        <p
+          style={{ color: "var(--primaryTheme)" }}
+          key={this.props.name}
+          id="pitem"
+        >
           {this.props.name}
           <br />
-          <strong>
+          <strong style={{ color: "var(--primaryTheme)" }}>
             Price: {"\u20B9"} {this.props.price}(1)
           </strong>
-          <strong>
+          <strong style={{ color: "var(--primaryTheme)" }}>
             Total: {"\u20B9"} {this.props.price * this.props.quantity}
           </strong>
           <br />

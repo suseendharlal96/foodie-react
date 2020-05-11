@@ -3,7 +3,7 @@
   z-index: 500;
   height: 450px;
   overflow: auto;
-  background-color: white;
+  background-color: var(--primaryBg);
   width: 70%;
   border: 1px solid #ccc;
   box-shadow: 1px 1px 1px black;

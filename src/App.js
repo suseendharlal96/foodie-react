@@ -9,23 +9,30 @@ import Success from "./pages/SuccessPage/SuccessPage";
 import MyOrder from "./pages/Orders/Orders";
 import Layout from "./components/Layout/Layout";
 import Logout from "./pages/Auth/logout/logout";
+import ThemeContext from "./shared/themecontext";
 
 function App() {
   return (
     <div>
       <Switch>
-        <Layout>
-          <Route exact path="/" component={Hotels}></Route>
-          <Route exact path="/auth" component={LoginPage}></Route>
-          <Route path="/checkout" component={Checkout}></Route>
-          <Route path="/success" component={Success}></Route>
-          <Route path="/orders" component={MyOrder}></Route>
-          <Route path="/logout" component={Logout}></Route>
-          <Route exact path="/order/:id" component={Orders}></Route>
-          <Route exact path="/hotel/:id/edit" component={Hotels}></Route>
-          <Route exact path="/order/:name/:id/edit" component={Orders}></Route>
-          {/* <Redirect from="/*" to="/" /> */}
-        </Layout>
+        <ThemeContext>
+          <Layout>
+            <Route exact path="/" component={Hotels}></Route>
+            <Route exact path="/auth" component={LoginPage}></Route>
+            <Route path="/checkout" component={Checkout}></Route>
+            <Route path="/success" component={Success}></Route>
+            <Route path="/orders" component={MyOrder}></Route>
+            <Route path="/logout" component={Logout}></Route>
+            <Route exact path="/order/:id" component={Orders}></Route>
+            <Route exact path="/hotel/:id/edit" component={Hotels}></Route>
+            <Route
+              exact
+              path="/order/:name/:id/edit"
+              component={Orders}
+            ></Route>
+            {/* <Redirect from="/*" to="/" /> */}
+          </Layout>
+        </ThemeContext>
       </Switch>
     </div>
   );

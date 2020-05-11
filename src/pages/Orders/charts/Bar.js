@@ -1,5 +1,6 @@
 import React from "react";
 import { Bar } from "react-chartjs-2";
+import "../../../Theme.css";
 
 const BarChart = (props) => {
   return (
@@ -21,6 +22,7 @@ const BarChart = (props) => {
       options={{
         title: {
           display: true,
+          fontColor: "green",
           text: props.label,
           fontSize: 20,
         },

@@ -9,7 +9,7 @@
   display: flex;
   flex-wrap: wrap;
   justify-content: space-evenly;
-  background-color: #ebd7ff;
+  background-color: var(--primaryBg);
 }
 
 #menubar {
@@ -50,7 +50,8 @@
 .cart {
   margin: 20px;
   padding: 10px;
-  background: #e9e6ec;
+  border: 1px solid var(--primaryText);
+  background: var(--primaryBg);
   box-shadow: 0px 0px 15px 6px #283e530c;
 }
 
@@ -102,10 +103,12 @@ div.cart p {
   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
+  color: var(--primaryText);
   width: 180px;
 }
 
 div.cart p:hover {
+  color: var(--primaryText);
   text-overflow: clip;
   white-space: normal;
   word-break: break-all;

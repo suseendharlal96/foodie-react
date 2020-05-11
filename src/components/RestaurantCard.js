@@ -30,7 +30,9 @@ class RestaurantCard extends React.Component {
         {/* <Link to={{
                     pathname:`/order/${this.props.name}`}}>
                 </Link> */}
-        <h3 id="hotel-title">{this.props.name}</h3>
+        <h3 id="hotel-title" style={{ color: "var(--primaryText)" }}>
+          {this.props.name}
+        </h3>
         <p>{this.props.cuisines}</p>
         <p>Rating: {"★".repeat(this.props.rating)}</p>
         <p>Reviews: {this.props.reviews}</p>

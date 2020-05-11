@@ -247,7 +247,7 @@ const LoginPage = (props) => {
       <div className="col-md-5">
         <div className={styles.Auth}>
           <h1 id="logoApp">FOODIE</h1>
-          <h2>LOG IN</h2>
+          <h2 style={{ color: "var(--secondaryText)" }}>LOG IN</h2>
           {error}
           {form}
           {modeButton}

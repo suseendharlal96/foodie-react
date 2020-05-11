@@ -8,6 +8,7 @@ import thunk from "redux-thunk";
 import authReducer from "./store/reducers/auth";
 import orderReducer from "./store/reducers/orderReducer";
 import "./index.css";
+import "./Theme.css";
 import App from "./App";
 import * as serviceWorker from "./serviceWorker";
 

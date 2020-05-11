@@ -201,7 +201,7 @@ class Orders extends React.Component {
             </div>
             <div id="items">
               <center>
-                <h2>Order Now</h2>
+                <h2 style={{ color: "var(--primaryText)" }}>Order Now</h2>
               </center>
               <br />
 
@@ -227,7 +227,7 @@ class Orders extends React.Component {
             <div id="logo"></div>
             <div id="right">
               <div id="right-in">
-                <h4>My Cart</h4>
+                <h4 style={{ color: "var(--primaryText)" }}>My Cart</h4>
                 {this.state.newList.length
                   ? this.state.newList[0].menu.map((cart, index) => {
                       if (cart.quantity >= 1) {
@@ -247,7 +247,7 @@ class Orders extends React.Component {
                   : null}
 
                 <div id="total">
-                  <p id="total">
+                  <p style={{ color: "var(--primaryText)" }} id="total">
                     {" "}
                     Grand Total:
                     <span className="spn">

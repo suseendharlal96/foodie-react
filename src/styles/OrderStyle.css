@@ -1,5 +1,5 @@
 body {
-  background-color: #ebd7ff;
+  background-color: var(--primaryBg);
 }
 
 * {
@@ -88,7 +88,7 @@ body {
 #items p {
   margin-top: 10px;
   font-size: 15px;
-  color: darkslategray;
+  color: var(--primaryTheme);
   max-width: 700px;
 }
 
@@ -104,11 +104,14 @@ body {
 .amount {
   margin-top: -10px !important;
   padding-bottom: 10px;
-  border-bottom: 1px solid gray;
+  font-weight: bold;
+  color: var(--primaryText) !important;
+  border-bottom: 1px solid var(--primaryText);
 }
 
 .fname {
   padding-top: 10px;
+  color: var(--primaryText);
 }
 
 #right-in {
@@ -118,7 +121,7 @@ body {
 
 #right {
   font-size: 23px;
-  background: #e9e6ec;
+  background: var(--primaryBg);
   box-shadow: 0px 0px 15px 6px #283e530c;
 }
 

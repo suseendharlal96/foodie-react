@@ -35,7 +35,8 @@ const Order = (props) => {
           textTransform: "capitalize",
           display: "inline-block",
           margin: "0 8px",
-          border: "1px solid #ccc",
+          border: "1px solid  var(--secondaryText)",
+          color: "var(--primaryText)",
           padding: "5px",
         }}
         key={ig.name}
@@ -46,25 +47,27 @@ const Order = (props) => {
   });
   return (
     <div className={styles.Order}>
-      <p>
-        <strong>Hotel Name: </strong>
+      <p style={{ color: "var(--primaryText)" }}>
+        <strong style={{ color: "var(--primaryTheme)" }}>Hotel Name: </strong>
         {props.orderData.name}
       </p>
-      <p>
-        <strong>Address: </strong>
+      <p style={{ color: "var(--primaryText)" }}>
+        <strong style={{ color: "var(--primaryTheme)" }}>Address: </strong>
         {props.orderData.address}
       </p>
-      <p>Items ordered: {ingredientOutput}</p>
-      <p>
+      <p style={{ color: "var(--primaryTheme)" }}>
+        Items ordered: {ingredientOutput}
+      </p>
+      <p style={{ color: "var(--primaryTheme)" }}>
         Total Price:{" "}
-        <strong>
+        <strong  style={{ color: "var(--primaryText)" }}>
           {"\u20B9"}
           {props.orderData.total}
         </strong>
       </p>
-      <p>
+      <p  style={{ color: "var(--primaryTheme)" }}>
         Ordered on:
-        <strong>{new Date(props.date).toString()}</strong>
+        <strong  style={{ color: "var(--primaryText)" }}>{new Date(props.date).toString()}</strong>
       </p>
       <div>
         <button className="btn btn-primary" onClick={details}>

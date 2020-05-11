@@ -14,7 +14,7 @@ const Orders = (props) => {
   const [priceCheck, setpriceCheck] = useState("");
   const [dateCheck, setdateCheck] = useState("");
   const [alphaCheck, setalphaCheck] = useState("");
-  const [mode, setMode] = useState("list");
+  const [mode, setMode] = useState("chart");
 
   useEffect(() => {
     if (!props.token) {
@@ -110,10 +110,15 @@ const Orders = (props) => {
   if (!props.error && props.orders && props.orders.length > 0) {
     filter = (
       <div>
-        <h2>My Orders:</h2>
-        <div style={{ fontWeight: "bold" }}>Filter By:</div>
+        <h2 style={{ color: "var(--primaryText)" }}>My Orders:</h2>
+        <div style={{ fontWeight: "bold", color: "var(--primaryTheme)" }}>
+          Filter By:
+        </div>
         <div className="float-right" style={{ marginRight: "20px" }}>
-          <label style={{ marginRight: "15px" }} htmlFor="dispmode">
+          <label
+            style={{ marginRight: "15px", color: "var(--primaryText)" }}
+            htmlFor="dispmode"
+          >
             Display Mode:
           </label>
           <span>
@@ -128,9 +133,9 @@ const Orders = (props) => {
             </select>
           </span>
         </div>
-        <span style={{ marginRight: "10px" }}>
+        <span style={{ marginRight: "10px", color: "var(--primaryText)" }}>
           <label style={{ marginRight: "10px" }}>
-            <strong>Date:</strong>
+            <strong style={{ color: "var(--primaryText)" }}>Date:</strong>
           </label>
           old:
           <input
@@ -149,9 +154,9 @@ const Orders = (props) => {
             checked={dateCheck === "new"}
           />
         </span>
-        <span style={{ marginRight: "10px" }}>
+        <span style={{ marginRight: "10px", color: "var(--primaryText)" }}>
           <label style={{ marginRight: "10px" }}>
-            <strong>Hotel Name:</strong>
+            <strong style={{ color: "var(--primaryText)" }}>Hotel Name:</strong>
           </label>
           A-z:
           <input
@@ -170,9 +175,9 @@ const Orders = (props) => {
             checked={alphaCheck === "desc"}
           />
         </span>
-        <span>
+        <span style={{ color: "var(--primaryText)" }}>
           <label style={{ marginRight: "10px" }}>
-            <strong>Price:</strong>
+            <strong style={{ color: "var(--primaryText)" }}>Price:</strong>
           </label>
           low:
           <input
@@ -194,14 +199,51 @@ const Orders = (props) => {
       </div>
     );
   } else if (!props.error) {
-    filter = <p>Loading...</p>;
+    filter = <p style={{ color: "var(--primaryText)" }}>Loading...</p>;
   } else {
-    filter = <p>No orders placed yet!</p>;
+    filter = (
+      <p style={{ color: "var(--primaryText)" }}>No orders placed yet!</p>
+    );
   }
   let a = [];
+  const lineColor = "var(--primaryText)";
   let ind = 1;
   for (let i = 0; i < 12; i++) {
     a.push(0);
+  }
+  let days = [];
+  const daysInMonth = (month, year) => {
+    console.log(new Date(year, month, 0).getDate());
+    return new Date(year, month, 0).getDate();
+  };
+  for (
+    let i = 0;
+    i < daysInMonth(new Date().getMonth() + 1, new Date().getFullYear());
+    i++
+  ) {
+    days.push(0);
+  }
+  let usualDays = [];
+  const months = [
+    "Jan",
+    "Feb",
+    "Mar",
+    "Apr",
+    "May",
+    "Jun",
+    "Jul",
+    "Aug",
+    "Sep",
+    "Oct",
+    "Nov",
+    "Dec",
+  ];
+  for (
+    let i = 1;
+    i <= daysInMonth(new Date().getMonth() + 1, new Date().getFullYear());
+    i++
+  ) {
+    usualDays.push(i + "th " + months[new Date().getMonth()]);
   }
   console.log("a", a);
   let hotel = [];
@@ -212,19 +254,22 @@ const Orders = (props) => {
     do {
       var color = Math.floor(Math.random() * 1000000 + 1);
     } while (bgColors.indexOf(color) >= 0);
-    bgColors.push("#" + ("000000" + color.toString(16)).slice(-6));
+    bgColors.push("#" + ("00DCE0" + color.toString(16)).slice(-6));
   }
   let hoverColors = [];
   while (hoverColors.length < 12) {
     do {
       var color = Math.floor(Math.random() * 1000000 + 1);
     } while (hoverColors.indexOf(color) >= 0);
-    hoverColors.push("#" + ("000000" + color.toString(16)).slice(-6));
+    hoverColors.push("#" + ("FFFFF" + color.toString(16)).slice(-6));
   }
 
   if (props.orders && props.orders.length) {
     props.orders.map((or, i) => {
       const month = or.orderDate.split("-")[1].replace(/0/g, "");
+      const date = new Date(or.orderDate).getDate();
+      console.log(date);
+      days[date - 1] = days[date - 1] + 1;
       a[month - 1] = a[month - 1] + 1;
       if (ind === 1) {
         hotel.push(or.orderData.name);
@@ -319,6 +364,7 @@ const Orders = (props) => {
             label={"Orders(based on hotel)"}
             hotel={hotel}
             hotelOrder={hotelOrder}
+            lineColor={lineColor}
             bgColors={bgColors}
             hoverColors={hoverColors}
           />
@@ -375,6 +421,26 @@ const Orders = (props) => {
               "Dec",
             ]}
             hotelOrder={a}
+            bgColors={bgColors}
+            hoverColors={hoverColors}
+          />
+        </div>
+      </div>
+      <div className="row">
+        <LineChart
+          label={"Orders(based on days)"}
+          hotel={usualDays}
+          hotelOrder={days}
+          bgColors={bgColors}
+          hoverColors={hoverColors}
+        />
+      </div>
+      <div className="row">
+        <div className="col-md-8">
+          <PieChart
+            label={"Orders(based on days)"}
+            hotel={usualDays}
+            hotelOrder={days}
             bgColors={bgColors}
             hoverColors={hoverColors}
           />

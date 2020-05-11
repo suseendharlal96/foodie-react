@@ -10,6 +10,7 @@ const LineChart = (props) => {
           {
             fill: false,
             lineTension: 0.5,
+            borderColor: "rgb(222, 184, 135)",
             label:
               props.label.search("price") !== -1
                 ? "Total ordered price"
@@ -24,6 +25,7 @@ const LineChart = (props) => {
         title: {
           display: true,
           text: props.label,
+          fontColor: "green",
           fontSize: 20,
         },
         legend: {
