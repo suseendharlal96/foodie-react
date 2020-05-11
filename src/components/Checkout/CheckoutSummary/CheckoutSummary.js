@@ -10,12 +10,16 @@ const CheckoutSummary = (props) => {
   return (
     <div className={styles.CheckoutSummary}>
       <div style={{ width: "100%", margin: "auto" }}>
-        <h3>Hotel Name: {props.orderData.name}</h3>
-        <p>Address: {props.orderData.address}</p>
-        <ol>
+        <h3 style={{ color: "var(--primaryText)" }}>
+          Hotel Name: {props.orderData.name}
+        </h3>
+        <p style={{ color: "var(--primaryText)" }}>
+          Address: {props.orderData.address}
+        </p>
+        <ol style={{ color: "var(--primaryText)" }}>
           {props.orderData.menu.map((m, index) => {
             return (
-              <li key={index}>
+              <li key={index} style={{ color: "var(--primaryText)" }}>
                 Name: {m.name} -- Price: {"\u20B9"} {m.price}(1) -- Quantity:{" "}
                 {m.quantity} -- Total: {"\u20B9"}
                 {m.price * m.quantity}
@@ -23,9 +27,9 @@ const CheckoutSummary = (props) => {
             );
           })}
         </ol>
-        <p>
+        <p style={{ color: "var(--primaryTheme)" }}>
           Total Price:{" "}
-          <strong>
+          <strong style={{ color: "var(--primaryText)" }}>
             {"\u20B9"}
             {props.orderData.total}
           </strong>
