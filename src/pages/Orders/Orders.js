@@ -128,11 +128,10 @@ const Orders = (props) => {
             </select>
           </span>
         </div>
-        <span>
-          <label>
+        <span style={{ marginRight: "10px" }}>
+          <label style={{ marginRight: "10px" }}>
             <strong>Date:</strong>
           </label>
-          <br />
           old:
           <input
             type="radio"
@@ -150,12 +149,10 @@ const Orders = (props) => {
             checked={dateCheck === "new"}
           />
         </span>
-        <br />
-        <span>
-          <label>
+        <span style={{ marginRight: "10px" }}>
+          <label style={{ marginRight: "10px" }}>
             <strong>Hotel Name:</strong>
           </label>
-          <br />
           A-z:
           <input
             type="radio"
@@ -173,30 +170,26 @@ const Orders = (props) => {
             checked={alphaCheck === "desc"}
           />
         </span>
-        <br />
         <span>
-          <label>
+          <label style={{ marginRight: "10px" }}>
             <strong>Price:</strong>
           </label>
-          <br />
-          <span>
-            low:
-            <input
-              type="radio"
-              name="price"
-              value="low"
-              onChange={(event) => sort(event)}
-              checked={priceCheck === "low"}
-            />
-            high:
-            <input
-              type="radio"
-              name="price"
-              value="high"
-              onChange={(event) => sort(event)}
-              checked={priceCheck === "high"}
-            />
-          </span>
+          low:
+          <input
+            type="radio"
+            name="price"
+            value="low"
+            onChange={(event) => sort(event)}
+            checked={priceCheck === "low"}
+          />
+          high:
+          <input
+            type="radio"
+            name="price"
+            value="high"
+            onChange={(event) => sort(event)}
+            checked={priceCheck === "high"}
+          />
         </span>
       </div>
     );
@@ -256,7 +249,7 @@ const Orders = (props) => {
   }
 
   const listData = (
-    <div style={{ height: "396px", overflow: "auto" }}>
+    <div style={{ height: "530px", width: "100%", overflow: "auto" }}>
       {props.token || localStorage.getItem("token") !== null
         ? props.orders.map((order) => (
             <Order
@@ -274,7 +267,10 @@ const Orders = (props) => {
   );
 
   const chartData = (
-    <div className="col-md-12" style={{ height: "396px", overflow: "auto" }}>
+    <div
+      className="col-md-12"
+      style={{ height: "530px", width: "100%", overflow: "auto" }}
+    >
       <div className="row">
         <div className="col-md-6">
           <BarChart
