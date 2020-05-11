@@ -427,13 +427,15 @@ const Orders = (props) => {
         </div>
       </div>
       <div className="row">
-        <LineChart
-          label={"Orders(based on days)"}
-          hotel={usualDays}
-          hotelOrder={days}
-          bgColors={bgColors}
-          hoverColors={hoverColors}
-        />
+        <div className="col-md-8">
+          <LineChart
+            label={"Orders(based on days)"}
+            hotel={usualDays}
+            hotelOrder={days}
+            bgColors={bgColors}
+            hoverColors={hoverColors}
+          />
+        </div>
       </div>
       <div className="row">
         <div className="col-md-8">

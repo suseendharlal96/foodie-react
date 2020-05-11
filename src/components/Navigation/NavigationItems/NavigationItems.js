@@ -34,6 +34,7 @@ const NavigationItems = (props) => {
         style={{
           outline: "none",
           borderRadius: "15px",
+          padding: "9px",
           float: "right",
           color: " var(--primaryText)",
           backgroundColor: "var(--primaryBg)",
