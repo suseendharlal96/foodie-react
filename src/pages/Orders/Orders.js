@@ -14,7 +14,7 @@ const Orders = (props) => {
   const [priceCheck, setpriceCheck] = useState("");
   const [dateCheck, setdateCheck] = useState("");
   const [alphaCheck, setalphaCheck] = useState("");
-  const [mode, setMode] = useState("chart");
+  const [mode, setMode] = useState("list");
 
   useEffect(() => {
     if (!props.token) {
