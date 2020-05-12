@@ -14,7 +14,7 @@ const Orders = (props) => {
   const [priceCheck, setpriceCheck] = useState("");
   const [dateCheck, setdateCheck] = useState("");
   const [alphaCheck, setalphaCheck] = useState("");
-  const [mode, setMode] = useState("list");
+  const [mode, setMode] = useState("chart");
 
   useEffect(() => {
     if (!props.token) {
@@ -29,13 +29,10 @@ const Orders = (props) => {
 
   const changeMode = (event) => {
     event.persist();
-    console.log(event);
-    console.log(event.target.value);
     setMode(event.target.value);
   };
 
   const sort = (event) => {
-    console.log(event.target.value);
     if (event.target.value === "low") {
       props.orders.sort((a, b) => +a.orderData.total - +b.orderData.total);
       setpriceCheck(event.target.value);
@@ -63,7 +60,6 @@ const Orders = (props) => {
       setdateCheck(event.target.value);
       setalphaCheck("");
     } else if (event.target.value === "asc") {
-      console.log(1);
       props.orders.sort((a, b) =>
         compareName(a.orderData.name, b.orderData.name)
       );
@@ -71,7 +67,6 @@ const Orders = (props) => {
       setpriceCheck("");
       setdateCheck("");
     } else if (event.target.value === "desc") {
-      console.log(2);
       props.orders.sort((a, b) =>
         compareName(b.orderData.name, a.orderData.name)
       );
@@ -213,7 +208,6 @@ const Orders = (props) => {
   }
   let days = [];
   const daysInMonth = (month, year) => {
-    console.log(new Date(year, month, 0).getDate());
     return new Date(year, month, 0).getDate();
   };
   for (
@@ -243,9 +237,28 @@ const Orders = (props) => {
     i <= daysInMonth(new Date().getMonth() + 1, new Date().getFullYear());
     i++
   ) {
-    usualDays.push(i + "th " + months[new Date().getMonth()]);
+    if (i < 4) {
+      if (i === 1) {
+        usualDays.push(i + "st " + months[new Date().getMonth()]);
+      } else if (i === 2) {
+        usualDays.push(i + "nd " + months[new Date().getMonth()]);
+      } else if (i === 3) {
+        usualDays.push(i + "rd " + months[new Date().getMonth()]);
+      }
+    } else if (i >= 4 && i < 19) {
+      usualDays.push(i + "th " + months[new Date().getMonth()]);
+    } else if (i >= 19) {
+      if (i.toString().endsWith("1")) {
+        usualDays.push(i + "st " + months[new Date().getMonth()]);
+      } else if (i.toString().endsWith("2")) {
+        usualDays.push(i + "nd " + months[new Date().getMonth()]);
+      } else if (i.toString().endsWith("3")) {
+        usualDays.push(i + "rd " + months[new Date().getMonth()]);
+      } else {
+        usualDays.push(i + "th " + months[new Date().getMonth()]);
+      }
+    }
   }
-  console.log("a", a);
   let hotel = [];
   let hotelOrder = [];
   let hotelPrice = [];
@@ -254,7 +267,7 @@ const Orders = (props) => {
     do {
       var color = Math.floor(Math.random() * 1000000 + 1);
     } while (bgColors.indexOf(color) >= 0);
-    bgColors.push("#" + ("00DCE0" + color.toString(16)).slice(-6));
+    bgColors.push("#" + ("265BCF" + color.toString(16)).slice(-6));
   }
   let hoverColors = [];
   while (hoverColors.length < 12) {
@@ -268,7 +281,6 @@ const Orders = (props) => {
     props.orders.map((or, i) => {
       const month = or.orderDate.split("-")[1].replace(/0/g, "");
       const date = new Date(or.orderDate).getDate();
-      console.log(date);
       days[date - 1] = days[date - 1] + 1;
       a[month - 1] = a[month - 1] + 1;
       if (ind === 1) {
@@ -276,7 +288,6 @@ const Orders = (props) => {
         hotelOrder.push(0);
         hotelPrice.push(0);
         ind = ind + 1;
-        console.log(hotel, hotelOrder);
       } else {
         const hIndex = hotel.findIndex((data) => data === or.orderData.name);
         if (hIndex === -1) {

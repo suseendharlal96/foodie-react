@@ -7,7 +7,9 @@ import Front from "../../images/FB.jpg";
 const success = (props) => {
   return (
     <div className={classes.Successpage}>
-      <h2>Your order has been successfully placed!</h2>
+      <h2 style={{ color: "var(--primaryText)" }}>
+        Your order has been successfully placed!
+      </h2>
       <Button btntype="Success" clicked={() => props.history.replace("/")}>
         Place New Order!
       </Button>
