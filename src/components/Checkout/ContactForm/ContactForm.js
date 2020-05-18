@@ -223,7 +223,7 @@ const ContactForm = (props) => {
   );
   return (
     <div className={styles.ContactData}>
-      <h4>Enter your Contact Data</h4>
+      <h4 style={{color:'var(--primaryText)'}}>Enter your Contact Data</h4>
       {form}
     </div>
   );
