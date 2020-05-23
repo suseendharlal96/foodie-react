@@ -72,25 +72,27 @@ class Hotels extends React.Component {
             </select>
           </p>
         </div>
-        {this.state.list.map((x, i) => (
-          <TransitionGroup key={i}>
-            <CSSTransition classNames="fade" timeout={300}>
-              <div
-                className="rest-card"
-                style={{ marginTop: "15%", cursor: "pointer" }}
-              >
-                <RestaurantCard
-                  {...this.props}
-                  thumbnail_image={x.thumbnail_image}
-                  name={x.name}
-                  cuisines={x.cuisines}
-                  rating={x.rating}
-                  reviews={x.reviews}
-                />
-              </div>
-            </CSSTransition>
-          </TransitionGroup>
-        ))}
+        <div style={{ marginTop: "5%" }}>
+          {this.state.list.map((x, i) => (
+            <TransitionGroup key={i}>
+              <CSSTransition classNames="fade" timeout={300}>
+                <div
+                  className="rest-card"
+                  style={{ marginTop: "10%", cursor: "pointer" }}
+                >
+                  <RestaurantCard
+                    {...this.props}
+                    thumbnail_image={x.thumbnail_image}
+                    name={x.name}
+                    cuisines={x.cuisines}
+                    rating={x.rating}
+                    reviews={x.reviews}
+                  />
+                </div>
+              </CSSTransition>
+            </TransitionGroup>
+          ))}
+        </div>
       </div>
     );
   }
