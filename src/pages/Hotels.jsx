@@ -72,7 +72,7 @@ class Hotels extends React.Component {
             </select>
           </p>
         </div>
-        <div style={{ marginTop: "5%" }}>
+        <div className="hotels">
           {this.state.list.map((x, i) => (
             <TransitionGroup key={i}>
               <CSSTransition classNames="fade" timeout={300}>

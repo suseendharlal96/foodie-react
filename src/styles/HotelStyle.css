@@ -12,6 +12,13 @@
   background-color: var(--primaryBg);
 }
 
+.hotels {
+  margin-top: 5%;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-evenly;
+}
+
 #menubar {
   height: auto;
   position: fixed;
