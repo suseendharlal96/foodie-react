@@ -1,6 +1,9 @@
 import React from "react";
 import { connect } from "react-redux";
 
+import TransitionGroup from "react-transition-group/TransitionGroup";
+import CSSTransition from "react-transition-group/CSSTransition";
+
 import "../styles/HotelStyle.css";
 import data from "../data/data.json";
 import RestaurantCard from "../components/RestaurantCard";
@@ -70,16 +73,23 @@ class Hotels extends React.Component {
           </p>
         </div>
         {this.state.list.map((x, i) => (
-          <div style={{ marginTop: "10%", cursor: "pointer" }} key={i}>
-            <RestaurantCard
-              {...this.props}
-              thumbnail_image={x.thumbnail_image}
-              name={x.name}
-              cuisines={x.cuisines}
-              rating={x.rating}
-              reviews={x.reviews}
-            />
-          </div>
+          <TransitionGroup key={i}>
+            <CSSTransition classNames="fade" timeout={300}>
+              <div
+                className="rest-card"
+                style={{ marginTop: "10%", cursor: "pointer" }}
+              >
+                <RestaurantCard
+                  {...this.props}
+                  thumbnail_image={x.thumbnail_image}
+                  name={x.name}
+                  cuisines={x.cuisines}
+                  rating={x.rating}
+                  reviews={x.reviews}
+                />
+              </div>
+            </CSSTransition>
+          </TransitionGroup>
         ))}
       </div>
     );

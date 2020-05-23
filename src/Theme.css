@@ -27,7 +27,7 @@ html {
 html[data-theme="dark"] {
   /* global colors */
   --primaryTheme: #e52863;
-  --primaryBg: #1a1a1d;
+  --primaryBg: black;
   --primaryText: rgb(222, 184, 135);
   --secondaryText: rgba(255, 255, 255, 0.6);
   --primaryButtonText: #fff;
