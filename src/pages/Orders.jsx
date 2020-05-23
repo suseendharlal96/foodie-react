@@ -12,13 +12,9 @@ class Orders extends React.Component {
     super();
     this.state = {
       list: data,
-      id: "",
       newList: [],
       price: "",
-      name: [],
       total: 0,
-      quantity: 0,
-      clickable: false,
     };
   }
 
