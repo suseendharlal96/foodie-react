@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { connect } from "react-redux";
 
-// import { Bar, Pie, Doughnut } from "react-chartjs-2";
+import dayjs from "dayjs";
 
 import BarChart from "./charts/Bar";
 import PieChart from "./charts/Pie";
@@ -206,83 +206,155 @@ const Orders = (props) => {
   for (let i = 0; i < 12; i++) {
     a.push(0);
   }
-  let days = [];
-  const daysInMonth = (month, year) => {
-    return new Date(year, month, 0).getDate();
-  };
-  for (
-    let i = 0;
-    i < daysInMonth(new Date().getMonth() + 1, new Date().getFullYear());
-    i++
-  ) {
-    days.push(0);
-  }
-  let usualDays = [];
-  const months = [
-    "Jan",
-    "Feb",
-    "Mar",
-    "Apr",
+  // const daysInMonth = (month, year) => {
+  //   return new Date(year, month, 0).getDate();
+  // };
+  // let currentMonthdays = [];
+  // for (
+  //   let i = 0;
+  //   i < daysInMonth(new Date().getMonth() + 1, new Date().getFullYear());
+  //   i++
+  // ) {
+  //   currentMonthdays.push(0);
+  // }
+  // let prevMonthdays = [];
+  // for (
+  //   let i = 0;
+  //   i < daysInMonth(new Date().getMonth(), new Date().getFullYear());
+  //   i++
+  // ) {
+  //   prevMonthdays.push(0);
+  // }
+  // let currentMonth = [];
+  // let prevMonth = [];
+  const fullMonths = [
+    "January",
+    "Febuary",
+    "March",
+    "April",
     "May",
-    "Jun",
-    "Jul",
-    "Aug",
-    "Sep",
-    "Oct",
-    "Nov",
-    "Dec",
+    "June",
+    "July",
+    "August",
+    "September",
+    "October",
+    "November",
+    "December",
   ];
-  for (
-    let i = 1;
-    i <= daysInMonth(new Date().getMonth() + 1, new Date().getFullYear());
-    i++
-  ) {
-    if (i < 4) {
-      if (i === 1) {
-        usualDays.push(i + "st " + months[new Date().getMonth()]);
-      } else if (i === 2) {
-        usualDays.push(i + "nd " + months[new Date().getMonth()]);
-      } else if (i === 3) {
-        usualDays.push(i + "rd " + months[new Date().getMonth()]);
-      }
-    } else if (i >= 4 && i < 19) {
-      usualDays.push(i + "th " + months[new Date().getMonth()]);
-    } else if (i >= 19) {
-      if (i.toString().endsWith("1")) {
-        usualDays.push(i + "st " + months[new Date().getMonth()]);
-      } else if (i.toString().endsWith("2")) {
-        usualDays.push(i + "nd " + months[new Date().getMonth()]);
-      } else if (i.toString().endsWith("3")) {
-        usualDays.push(i + "rd " + months[new Date().getMonth()]);
-      } else {
-        usualDays.push(i + "th " + months[new Date().getMonth()]);
-      }
-    }
-  }
+  // for (
+  //   let i = 1;
+  //   i <= daysInMonth(new Date().getMonth() + 1, new Date().getFullYear());
+  //   i++
+  // ) {
+  //   if (i < 4) {
+  //     if (i === 1) {
+  //       currentMonth.push(i + "st " + months[new Date().getMonth()]);
+  //     } else if (i === 2) {
+  //       currentMonth.push(i + "nd " + months[new Date().getMonth()]);
+  //     } else if (i === 3) {
+  //       currentMonth.push(i + "rd " + months[new Date().getMonth()]);
+  //     }
+  //   } else if (i >= 4 && i < 19) {
+  //     currentMonth.push(i + "th " + months[new Date().getMonth()]);
+  //   } else if (i >= 19) {
+  //     if (i.toString().endsWith("1")) {
+  //       currentMonth.push(i + "st " + months[new Date().getMonth()]);
+  //     } else if (i.toString().endsWith("2")) {
+  //       currentMonth.push(i + "nd " + months[new Date().getMonth()]);
+  //     } else if (i.toString().endsWith("3")) {
+  //       currentMonth.push(i + "rd " + months[new Date().getMonth()]);
+  //     } else {
+  //       currentMonth.push(i + "th " + months[new Date().getMonth()]);
+  //     }
+  //   }
+  // }
+  // for (
+  //   let i = 1;
+  //   i <= daysInMonth(new Date().getMonth(), new Date().getFullYear());
+  //   i++
+  // ) {
+  //   if (i < 4) {
+  //     if (i === 1) {
+  //       prevMonth.push(i + "st " + months[new Date().getMonth() - 1]);
+  //     } else if (i === 2) {
+  //       prevMonth.push(i + "nd " + months[new Date().getMonth() - 1]);
+  //     } else if (i === 3) {
+  //       prevMonth.push(i + "rd " + months[new Date().getMonth() - 1]);
+  //     }
+  //   } else if (i >= 4 && i < 19) {
+  //     prevMonth.push(i + "th " + months[new Date().getMonth() - 1]);
+  //   } else if (i >= 19) {
+  //     if (i.toString().endsWith("1")) {
+  //       prevMonth.push(i + "st " + months[new Date().getMonth() - 1]);
+  //     } else if (i.toString().endsWith("2")) {
+  //       prevMonth.push(i + "nd " + months[new Date().getMonth() - 1]);
+  //     } else if (i.toString().endsWith("3")) {
+  //       prevMonth.push(i + "rd " + months[new Date().getMonth() - 1]);
+  //     } else {
+  //       prevMonth.push(i + "th " + months[new Date().getMonth() - 1]);
+  //     }
+  //   }
+  // }
   let hotel = [];
   let hotelOrder = [];
   let hotelPrice = [];
   let bgColors = [];
-  while (bgColors.length < 12) {
+  while (bgColors.length < 31) {
     do {
       var color = Math.floor(Math.random() * 1000000 + 1);
     } while (bgColors.indexOf(color) >= 0);
     bgColors.push("#" + ("265BCF" + color.toString(16)).slice(-6));
   }
   let hoverColors = [];
-  while (hoverColors.length < 12) {
+  while (hoverColors.length < 31) {
     do {
       var color = Math.floor(Math.random() * 1000000 + 1);
     } while (hoverColors.indexOf(color) >= 0);
     hoverColors.push("#" + ("FFFFF" + color.toString(16)).slice(-6));
   }
-
+  let orderedMonth;
+  let l = [];
+  let r = [];
+  let m = [];
+  let k = [];
+  let dIndex = 1;
   if (props.orders && props.orders.length) {
     props.orders.map((or, i) => {
-      const month = or.orderDate.split("-")[1].replace(/0/g, "");
-      const date = new Date(or.orderDate).getDate();
-      days[date - 1] = days[date - 1] + 1;
-      a[month - 1] = a[month - 1] + 1;
+      orderedMonth = or.orderDate.split("-")[1].replace(/0/g, "");
+      if (dIndex === 1) {
+        l.push(dayjs(or.orderDate.split("T")[0]).format("MMMM D, YYYY"));
+        m.push(0);
+        // k.push(0);
+        dIndex++;
+      } else {
+        // k.push(0);
+        const b = l.findIndex(
+          (data) =>
+            data === dayjs(or.orderDate.split("T")[0]).format("MMMM D, YYYY")
+        );
+        if (b === -1) {
+          l.push(dayjs(or.orderDate.split("T")[0]).format("MMMM D, YYYY"));
+          m.push(0);
+        }
+      }
+      if (l && l.length) {
+        const b = l.findIndex(
+          (data) =>
+            data === dayjs(or.orderDate.split("T")[0]).format("MMMM D, YYYY")
+        );
+        m[b] = m[b] + 1;
+        k.push(or.orderData.name);
+      }
+      console.log(k);
+      l.sort((a, b) => new Date(a).getTime() - new Date(b).getTime());
+
+      // if (+orderedMonth === +new Date().getMonth() + 1) {
+      //   currentMonthdays[date - 1] = currentMonthdays[date - 1] + 1;
+      // }
+      // if (+orderedMonth === +new Date().getMonth()) {
+      //   prevMonthdays[date - 1] = prevMonthdays[date - 1] + 1;
+      // }
+      a[orderedMonth - 1] = a[orderedMonth - 1] + 1;
       if (ind === 1) {
         hotel.push(or.orderData.name);
         hotelOrder.push(0);
@@ -301,6 +373,9 @@ const Orders = (props) => {
         hotelOrder[index] = hotelOrder[index] + 1;
         hotelPrice[index] = hotelPrice[index] + or.orderData.total;
       }
+    });
+    l.forEach((p) => {
+      r.push(dayjs(p.split("T")[0]).format("MMMM D, YYYY"));
     });
   }
 
@@ -395,20 +470,7 @@ const Orders = (props) => {
         <div className="col-md-6">
           <BarChart
             label={"Orders(based on months)"}
-            hotel={[
-              "Jan",
-              "Feb",
-              "Mar",
-              "Apr",
-              "May",
-              "Jun",
-              "Jul",
-              "Aug",
-              "Sep",
-              "Oct",
-              "Nov",
-              "Dec",
-            ]}
+            hotel={fullMonths}
             hotelOrder={a}
             bgColors={bgColors}
             hoverColors={hoverColors}
@@ -417,20 +479,7 @@ const Orders = (props) => {
         <div className="col-md-6">
           <PieChart
             label={"Orders(based on months)"}
-            hotel={[
-              "Jan",
-              "Feb",
-              "Mar",
-              "Apr",
-              "May",
-              "Jun",
-              "Jul",
-              "Aug",
-              "Sep",
-              "Oct",
-              "Nov",
-              "Dec",
-            ]}
+            hotel={fullMonths}
             hotelOrder={a}
             bgColors={bgColors}
             hoverColors={hoverColors}
@@ -440,9 +489,9 @@ const Orders = (props) => {
       <div className="row">
         <div className="col-md-8">
           <LineChart
-            label={"Orders(based on days)"}
-            hotel={usualDays}
-            hotelOrder={days}
+            label={"Orders based on days"}
+            hotel={r}
+            hotelOrder={m}
             bgColors={bgColors}
             hoverColors={hoverColors}
           />
@@ -451,9 +500,9 @@ const Orders = (props) => {
       <div className="row">
         <div className="col-md-8">
           <PieChart
-            label={"Orders(based on days)"}
-            hotel={usualDays}
-            hotelOrder={days}
+            label={"Orders based on days"}
+            hotel={l}
+            hotelOrder={m}
             bgColors={bgColors}
             hoverColors={hoverColors}
           />
