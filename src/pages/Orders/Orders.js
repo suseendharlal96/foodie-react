@@ -345,7 +345,6 @@ const Orders = (props) => {
         m[b] = m[b] + 1;
         k.push(or.orderData.name);
       }
-      console.log(k);
       l.sort((a, b) => new Date(a).getTime() - new Date(b).getTime());
 
       // if (+orderedMonth === +new Date().getMonth() + 1) {

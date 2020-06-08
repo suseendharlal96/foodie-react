@@ -49,7 +49,10 @@ export const purchaseFood = (orderData, token) => {
 export const setFetchedOrders = (orderData) => {
   return {
     type: actionType.SET_FETCHED_ORDERS,
-    orderData: orderData.reverse(),
+    orderData: orderData.sort(
+      (a, b) =>
+        new Date(a.orderDate).getTime() - new Date(b.orderDate).getTime()
+    ),
   };
 };
 
