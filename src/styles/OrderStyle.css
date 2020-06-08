@@ -1,0 +1,163 @@
+body {
+  background-color: var(--primaryBg);
+}
+
+* {
+  margin: 0;
+  padding: 0;
+}
+
+#content {
+  display: flex;
+  overflow: hidden;
+  justify-content: space-between;
+}
+
+.nav {
+  height: 70px;
+  background-color: #ec4a4a;
+}
+
+#img {
+  border-radius: 50%;
+}
+.name {
+  margin-top: 12px;
+  margin-right: 20px;
+  font-size: 18px;
+  color: white;
+}
+#logo {
+  display: inline;
+  float: left;
+  margin: auto;
+  padding-left: 30px;
+  padding-top: 20px;
+  color: white;
+}
+#user {
+  display: flex;
+  float: right;
+  margin: auto;
+  padding-right: 40px;
+  padding-top: 10px;
+}
+.profile {
+  height: 35px;
+  width: 35px;
+  margin-top: 2px;
+  display: inline-block;
+}
+
+#head {
+  height: 15vh;
+  width: 75%;
+  background-color: #332323;
+  padding-top: 20px;
+  padding-left: 20px;
+}
+
+#total {
+  padding-top: 10px;
+}
+
+.hname {
+  color: white;
+  margin-left: 30px;
+  margin-bottom: 7px;
+}
+
+.aname {
+  color: white;
+  margin-left: 30px;
+  margin-top: 2px;
+}
+
+#panel {
+  width: 25%;
+  height: 100vh;
+  background-color: gainsboro;
+}
+
+#items {
+  margin-top: 55px;
+  padding-left: 70px;
+  margin-right: 100px;
+}
+
+#items p {
+  margin-top: 10px;
+  font-size: 15px;
+  color: var(--primaryTheme);
+  max-width: 700px;
+}
+
+.desc {
+  display: flex;
+}
+
+.btn {
+  width: 80px;
+  padding: 7px;
+}
+
+.amount {
+  margin-top: -10px !important;
+  padding-bottom: 10px;
+  font-weight: bold;
+  color: var(--primaryText) !important;
+  border-bottom: 1px solid var(--primaryText);
+}
+
+.fname {
+  padding-top: 10px;
+  color: var(--primaryText);
+}
+
+#right-in {
+  padding: 30px;
+  margin-left: 20px;
+}
+
+#right {
+  font-size: 23px;
+  background: var(--primaryBg);
+  box-shadow: 0px 0px 15px 6px var(--primaryText);
+}
+
+#pitem {
+  padding-top: 20px;
+  margin-right: 70px;
+  color: darkslategray;
+  padding-bottom: 20px;
+  border-bottom: 1px solid gray;
+  font-size: 15px;
+}
+.ip {
+  height: 30px;
+  width: 30px;
+  font-size: 15px;
+  margin-left: 5px;
+}
+
+.spn {
+  margin-left: 10px;
+}
+#tx-w {
+  height: 30px;
+  padding: 2px;
+  width: 30px;
+}
+
+#pay {
+  width: 80%;
+  height: 40px;
+  margin: 15px;
+  background-color: #ec4a4a;
+  color: #fff;
+  font-size: 16px;
+}
+#pay:disabled {
+  background-color: grey;
+  color: #332323;
+}
