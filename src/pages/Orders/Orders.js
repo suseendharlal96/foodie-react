@@ -320,7 +320,11 @@ const Orders = (props) => {
   let dIndex = 1;
   if (props.orders && props.orders.length) {
     props.orders.map((or, i) => {
-      orderedMonth = or.orderDate.split("-")[1].replace(/0/g, "");
+      console.log("date", or.orderDate);
+      orderedMonth =
+        or.orderDate.split("-")[1].indexOf(0) !== 1
+          ? or.orderDate.split("-")[1].replace(/0/g, "")
+          : or.orderDate.split("-")[1];
       if (dIndex === 1) {
         l.push(dayjs(or.orderDate.split("T")[0]).format("MMMM D, YYYY"));
         m.push(0);
@@ -353,6 +357,7 @@ const Orders = (props) => {
       // if (+orderedMonth === +new Date().getMonth()) {
       //   prevMonthdays[date - 1] = prevMonthdays[date - 1] + 1;
       // }
+      // console.log("month", orderedMonth);
       a[orderedMonth - 1] = a[orderedMonth - 1] + 1;
       if (ind === 1) {
         hotel.push(or.orderData.name);

@@ -33,7 +33,7 @@ class Orders extends React.Component {
     });
     console.log(List);
     const arr = [];
-    List.map((list) => {
+    List.forEach((list) => {
       arr.push({
         id: list.id,
         name: list.name,
@@ -68,7 +68,7 @@ class Orders extends React.Component {
       a = updateOrder.orderData;
       let updatedMenu = [];
       if (arr && arr.length) {
-        a.menu.map((m) => {
+        a.menu.forEach((m) => {
           const ind = arr[0].menu.findIndex((data) => data.id === m.id);
           if (ind !== -1) {
             arr[0].menu[ind] = m;
@@ -128,8 +128,8 @@ class Orders extends React.Component {
 
   calcQuantity = (type, id) => {
     const b = [...this.state.newList];
-    b.map((m) => {
-      m.menu.map((me) => {
+    b.forEach((m) => {
+      m.menu.forEach((me) => {
         if (me.id === id) {
           me.quantity = type === "add" ? me.quantity + 1 : me.quantity - 1;
         }
@@ -141,7 +141,7 @@ class Orders extends React.Component {
 
   total = () => {
     let tot = 0;
-    this.state.newList[0].menu.map((m) => {
+    this.state.newList[0].menu.forEach((m) => {
       tot = tot + m.price * m.quantity;
     });
     this.setState({
@@ -161,7 +161,7 @@ class Orders extends React.Component {
         obj[key] = a[key];
       }
     }
-    a.menu.map((m) => {
+    a.menu.forEach((m) => {
       if (m.quantity > 0) {
         obj.menu.push(m);
       }

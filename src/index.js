@@ -2,11 +2,13 @@ import React from "react";
 import ReactDOM from "react-dom";
 import { BrowserRouter } from "react-router-dom";
 import { Provider } from "react-redux";
-import { createStore, applyMiddleware, combineReducers } from "redux";
+import { createStore, applyMiddleware, combineReducers, compose } from "redux";
 import thunk from "redux-thunk";
+import createSagaMiddleware from "redux-saga";
 
 import authReducer from "./store/reducers/auth";
 import orderReducer from "./store/reducers/orderReducer";
+import { watchAuthSaga, watchOrdersSaga } from "./store/sagas/index";
 import "./index.css";
 import "./Theme.css";
 import App from "./App";
@@ -17,7 +19,17 @@ const rootReducer = combineReducers({
   orderReducer: orderReducer,
 });
 
-const store = createStore(rootReducer, applyMiddleware(thunk));
+const sagaMiddleware = createSagaMiddleware();
+const composeEnhancers =
+  (typeof window !== undefined &&
+    window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__) ||
+  compose;
+const store = createStore(
+  rootReducer,
+  composeEnhancers(applyMiddleware(sagaMiddleware, thunk))
+);
+sagaMiddleware.run(watchAuthSaga);
+sagaMiddleware.run(watchOrdersSaga);
 
 ReactDOM.render(
   <Provider store={store}>

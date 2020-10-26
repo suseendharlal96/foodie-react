@@ -185,6 +185,7 @@ const LoginPage = (props) => {
   };
 
   const formSubmit = (event, isSignup) => {
+    console.log(isSignup);
     event.preventDefault();
     props.submitForm(isSignup, authForm, props, props.orderData);
   };

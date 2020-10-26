@@ -34,6 +34,7 @@ const authStore = (state = initialState, action) => {
         error: null,
       };
     case actionTypes.AUTH_LOGOUT:
+      localStorage.clear();
       return {
         ...state,
         loading: false,
